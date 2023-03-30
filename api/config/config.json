@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Weslalc@3421",
+    "database": "adopet",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Weslalc@3421",
+    "database": "adopet",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Weslalc@3421",
+    "database": "adopet",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
