@@ -5,9 +5,12 @@ const bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
   class Tutores extends Model {
     static associate(models) {
-      // define associations here
+      Tutores.hasMany(models.Adocoes, {
+        foreignKey: 'tutor_id'
+      })
     }
-  };
+  }
+
   Tutores.init({
     nome: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -16,11 +19,18 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Tutores',
     hooks: {
-      beforeCreate: async (user) => {
-        const salt = await bcrypt.genSaltSync(10);
-        user.senha = await bcrypt.hashSync(user.senha, salt);
+      beforeCreate: async (tutor, options) => {
+        const hashedPassword = await bcrypt.hash(tutor.senha, 10);
+        tutor.senha = hashedPassword;
+      },
+      beforeUpdate: async (tutor, options) => {
+        if (tutor.changed('senha')) {
+          const hashedPassword = await bcrypt.hash(tutor.senha, 10);
+          tutor.senha = hashedPassword;
+        }
       }
     }
   });
+
   return Tutores;
 };
