@@ -83,21 +83,37 @@ class PetController {
         }
     }
 
+    static async buscarPetsDisponiveis(req, res) {
+        try {
+            const petsDisponiveis = await database.Pets.findAll({
+                where: {
+                    adocao_id: {
+                        [Op.is]: null,
+                    },
+                },
+                include: [{ model: Adocoes }],
+            });
+            return res.status(200).json(petsDisponiveis);
+        } catch (error) {
+            return res.status(500).json({ message: 'Erro no servidor.' });
+        }
+    }
+
     static async buscarPetsComAdocao(req, res) {
         try {
-          const petsComAdocao = await database.Pets.findAll({
-            where: {
-              adocao_id: {
-                [Op.ne]: null,
-              },
-            },
-            include: [{ model: Adocoes }],
-          });
-          return res.status(200).json(petsComAdocao);
+            const petsComAdocao = await database.Pets.findAll({
+                where: {
+                    adocao_id: {
+                        [Op.ne]: null,
+                    },
+                },
+                include: [{ model: Adocoes }],
+            });
+            return res.status(200).json(petsComAdocao);
         } catch (error) {
-          return res.status(500).json({ message: 'Erro no servidor.' });
+            return res.status(500).json({ message: 'Erro no servidor.' });
         }
-      }
+    }
 
     static async buscarPetPorAdocao(req, res) {
         try {

@@ -3,6 +3,7 @@ const PetController = require('../controllers/PetController.js')
 
 const router = Router();
 
+router.get('/pets/disponivel', PetController.buscarPetsDisponiveis);
 router.get('/pets/adocao', PetController.buscarPetsComAdocao);
 router.get('/pets/adocao/:id', PetController.buscarPetPorAdocao);
 router.get('/pets', PetController.listarPets);

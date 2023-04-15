@@ -66,6 +66,7 @@ class AdocaoController {
     static async excluirAdocao(req, res) {
         try {
             const { id } = req.params;
+            const abrigo_id = req.user.id;
 
             const adocaoEncontrado = await database.Adocoes.findByPk(id);
 
