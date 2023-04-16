@@ -30,7 +30,6 @@ class AdocaoController {
     static async criarAdocao(req, res) {
         try {
             const novaAdocao = req.body;
-    
             const erro = validarNovaAdocao(novaAdocao);
             if (erro) {
               return res.status(400).json(erro);
@@ -66,8 +65,6 @@ class AdocaoController {
     static async excluirAdocao(req, res) {
         try {
             const { id } = req.params;
-            const abrigo_id = req.user.id;
-
             const adocaoEncontrado = await database.Adocoes.findByPk(id);
 
             if (!adocaoEncontrado) {
